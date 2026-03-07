@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#F06292"
+    android:background="#DE4964"
     >
 
 
@@ -19,40 +19,13 @@
         tools:layout_editor_absoluteY="102dp" />
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/cup_cake"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="200dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Glorious Cake'z"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view1"
-        app:layout_constraintVertical_bias="0.589"
-        tools:layout_editor_absoluteX="16dp"
-        />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Happiness is homemade"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/logo"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="440dp" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="51dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
