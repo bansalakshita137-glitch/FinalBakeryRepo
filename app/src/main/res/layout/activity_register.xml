@@ -102,7 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="#F06292"
+        android:backgroundTint="#DE4964"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="Sign up"
