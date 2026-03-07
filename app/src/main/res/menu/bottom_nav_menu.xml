@@ -3,29 +3,29 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/homeee"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/categoryFragment"
-        android:icon="@drawable/category"
+        android:icon="@drawable/Apps_png"
         android:title="Category" />
 
 
 
     <item
         android:id="@+id/cartFragment"
-        android:icon="@drawable/cart"
+        android:icon="@drawable/shopping_png"
         android:title="Cart" />
 
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/user"
+        android:icon="@drawable/account_png"
         android:title="Profile" />
 
     <item
         android:id="@+id/adminFragment"
-        android:icon="@drawable/user"
+        android:icon="@drawable/administrator_png"
         android:title="Admin"
         />
 

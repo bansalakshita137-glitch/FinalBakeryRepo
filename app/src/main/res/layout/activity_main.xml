@@ -10,7 +10,7 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/black"
+        app:backgroundTint="#DE4964"
         android:layout_marginStart="0dp"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
