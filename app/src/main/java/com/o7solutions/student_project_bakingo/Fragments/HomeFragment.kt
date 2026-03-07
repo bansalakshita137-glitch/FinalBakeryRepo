@@ -25,9 +25,11 @@ class HomeFragment : Fragment() {
 
 //    cake images
     private val imageList = listOf(
-        CarouselItem(R.drawable.cake_one),
-        CarouselItem(R.drawable.cake_two),
-        CarouselItem(R.drawable.cake_three)
+        CarouselItem(R.drawable.cake1),
+        CarouselItem(R.drawable.cake2),
+        CarouselItem(R.drawable.cake3),
+        CarouselItem(R.drawable.cake4),
+        CarouselItem(R.drawable.cake5)
     )
 
     private val scrollRunnable = object : Runnable {
