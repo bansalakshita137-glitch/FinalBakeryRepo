@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:title="Admin Side"
             app:titleTextColor="@color/white"
-            android:background="@color/secondary"
+            android:background="#DE4964"
             app:navigationIconTint="@color/white"
             app:navigationIcon="@drawable/ic_back"
 
@@ -36,12 +36,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Product"
+                android:backgroundTint="#DE4964"
                 android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/btnAddCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#DE4964"
                 android:text="Add Category" />
 
         </LinearLayout>
