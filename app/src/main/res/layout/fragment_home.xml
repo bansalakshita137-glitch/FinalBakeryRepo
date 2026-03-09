@@ -78,14 +78,13 @@
             android:paddingStart="24dp"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_favourite_ones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
 
+        <!--        footer-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recycler_favourite_ones"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" />-->
 
-<!--        footer-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
