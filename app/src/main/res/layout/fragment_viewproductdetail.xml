@@ -19,7 +19,6 @@
             app:title="Chocolate Truffle Cake"
             app:navigationIcon="@drawable/ic_back"
             app:navigationIconTint="@color/white"
-            android:navigationIconTint="@color/white"
             app:titleTextColor="@color/white"
 
 
@@ -57,14 +56,5 @@
             android:layout_height="match_parent"
             android:src="@drawable/img"
 
-
-
-
-
-
-
-
-
-
-
+</LinearLayout>
 </LinearLayout>

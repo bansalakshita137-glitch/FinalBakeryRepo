@@ -114,7 +114,8 @@
                     android:layout_height="2dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:background="#FFD700" /> <LinearLayout
+                    android:background="#FFD700" />
+                <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -124,14 +125,14 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@android:drawable/ic_menu_directions"
-                    app:tint="#CCCCCC" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:text="123 Business Ave, Tech City, 560001"
-                    android:textColor="#CCCCCC"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -145,14 +146,14 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@android:drawable/ic_menu_call"
-                        app:tint="#CCCCCC" />
+                        app:tint="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="+1 234 567 890"
-                        android:textColor="#CCCCCC"
+                        android:text="91 8847250832"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -166,14 +167,14 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@android:drawable/ic_dialog_email"
-                        app:tint="#CCCCCC" />
+                        app:tint="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:text="support@brandname.com"
-                        android:textColor="#CCCCCC"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
 
