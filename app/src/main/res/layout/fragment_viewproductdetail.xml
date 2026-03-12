@@ -51,6 +51,11 @@
             android:text="Rs.600"
             android:textSize="23dp"
             />
+\
+        <ImageView
+            android:layout_width="425dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/img"
 
 
 
