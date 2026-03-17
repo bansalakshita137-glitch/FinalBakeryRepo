@@ -14,8 +14,6 @@
         android:orientation="vertical"
         >
 
-
-<!--        top bar-->
         <com.google.android.material.appbar.AppBarLayout
            android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,8 +31,6 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal">
-
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,68 +54,60 @@
                 />
 
         </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
-
-<!--            Main COntent-->
-        </com.google.android.material.appbar.AppBarLayout>        <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/carouselRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             />
 
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="300dp"
+          android:orientation="horizontal"
+          android:layout_gravity="center"
+          >
 
-        <TextView
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu1"
+
+
+
+      </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/footerSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Favourite Ones"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-black"
-            android:paddingStart="24dp"
-            />
+            android:background="#DE4964"
+            android:orientation="vertical"
+            android:padding="24dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BRAND NAME"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <!--        footer-->
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recycler_favourite_ones"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="#FFD700" />
 
             <LinearLayout
-                android:id="@+id/footerSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#DE4964"
-                android:orientation="vertical"
-                android:padding="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="BRAND NAME"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#FFD700" />
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -136,66 +124,66 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@android:drawable/ic_menu_call"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="91 8847250832"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="24dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@android:drawable/ic_dialog_email"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="support@brandname.com"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#333333"
-                    android:layout_marginBottom="16dp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_call"
+                    app:tint="@color/white" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="© 2026 Brand Name. All rights reserved."
-                    android:textColor="#888888"
-                    android:textSize="12sp"
-                    android:textAlignment="center" />
-
+                    android:layout_marginStart="12dp"
+                    android:text="91 8847250832"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_dialog_email"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="support@brandname.com"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="#333333" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="© 2026 Brand Name. All rights reserved."
+                android:textAlignment="center"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
 
 
 
