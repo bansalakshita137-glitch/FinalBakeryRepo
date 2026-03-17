@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.o7solutions.student_project_bakingo.Product
 import com.o7solutions.student_project_bakingo.R
 
-
 class ProductAdapter(
-    private val productList: List<Product>
+    private val productList: List<Product>,
+    private val onItemClick: (Product) -> Unit   // 🔹 Click listener
 ) : RecyclerView.Adapter<ProductAdapter.ProductVH>() {
 
     inner class ProductVH(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +33,7 @@ class ProductAdapter(
         holder.tvName.text = product.name
         holder.tvPrice.text = "₹${product.price}"
 
-        // 🔹 Load 0th image
+        // 🔹 Load first image
         if (!product.images.isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
                 .load(product.images!![0])
@@ -41,6 +41,11 @@ class ProductAdapter(
                 .into(holder.imgProduct)
         } else {
             holder.imgProduct.setImageResource(R.drawable.ic_logo)
+        }
+
+        // 🔹 Handle item click
+        holder.itemView.setOnClickListener {
+            onItemClick(product)
         }
     }
 

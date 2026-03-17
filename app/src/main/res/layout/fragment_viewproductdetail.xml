@@ -1,61 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.viewproductdetail">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Toolbar (fixed at top) -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:background="#DE4964"
+        app:title="Product Detail"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/white"
+        app:titleTextColor="@color/white"/>
 
-        <com.google.android.material.appbar.MaterialToolbar
+    <!-- 🔹 Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#DE4964"
-            app:title="Chocolate Truffle Cake"
-            app:navigationIcon="@drawable/ic_back"
-            app:navigationIconTint="@color/white"
-            app:titleTextColor="@color/white"
+            android:layout_height="wrap_content">
 
-
-
-            />
-
-
+            <!-- Product Image -->
             <ImageView
+                android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@null"
-                android:src="@drawable/trufflecake"/>
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"/>
 
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="10dp"/>
 
+            <!-- Price -->
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Chocolate Truffle Cake"
-            android:textSize="25sp"
-            android:textStyle="bold">
+            <!-- Description -->
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Description here"/>
 
-        </TextView>
+            <!-- Cake Message -->
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter cake message"
+                android:padding="10dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Rs.600"
-            android:textSize="23dp"
-            />
-\
-        <ImageView
-            android:layout_width="425dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/img"
-            />
+            <!-- Weight Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Weight"
+                android:textStyle="bold"
+                android:padding="10dp"/>
 
-</LinearLayout>
+            <!-- Weight Recycler -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weightRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="5dp"/>
+
+            <!-- Add to Cart Button -->
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add to Cart"
+                android:layout_margin="10dp"
+                android:backgroundTint="#DE4964"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

@@ -55,6 +55,16 @@
             android:name="categoryId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.o7solutions.student_project_bakingo.Fragments.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/viewproductdetail"
+        android:name="com.o7solutions.student_project_bakingo.Fragments.viewproductdetail"
+        android:label="fragment_viewproductdetail"
+        tools:layout="@layout/fragment_viewproductdetail" />
 
 
 </navigation>

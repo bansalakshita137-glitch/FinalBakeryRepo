@@ -1,5 +1,8 @@
 package com.o7solutions.student_project_bakingo
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class User(
     var name: String ?= null,
     var email: String?= null,
@@ -15,6 +18,7 @@ data class Category(
 )
 
 
+@Parcelize
 data class Product(
     var name : String ?= null,
     var categoryId: String ?= null,
@@ -23,6 +27,19 @@ data class Product(
     var description: String ?= null,
     var sellCount: Int ?= 0,
     var images: ArrayList<String> ?= ArrayList()
-)
+): Parcelable
+
 
 data class CarouselItem(val imageResId: Int)
+
+data class CartData(
+    var name: String? = null,
+    var categoryId: String? = null,
+    var price: String? = null,
+    var time: String? = null,
+    var description: String? = null,
+    var sellCount: Int? = 0,
+    var images: ArrayList<String>? = ArrayList(),
+    var weight: String? = null,
+    var message: String? = null
+)
