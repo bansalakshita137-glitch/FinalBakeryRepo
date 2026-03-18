@@ -13,11 +13,8 @@ import com.o7solutions.student_project_bakingo.R
 
 class ProductAdapter(
     private val productList: List<Product>,
-<<<<<<< Updated upstream
-    private val onItemClick: (Product) -> Unit   // 🔹 Click listener
-=======
-    private val itemOnClick: OnItemClickListener
->>>>>>> Stashed changes
+
+    private val onItemClick: (Product) -> Unit ,  // 🔹 Click listener
 ) : RecyclerView.Adapter<ProductAdapter.ProductVH>() {
 
     inner class ProductVH(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,15 +35,10 @@ class ProductAdapter(
         holder.tvName.text = product.name
         holder.tvPrice.text = "₹${product.price}"
 
-<<<<<<< Updated upstream
-        // 🔹 Load first image
-=======
-        holder.itemView.setOnClickListener {
-            itemOnClick.onClick(product)
-        }
+//        holder.itemView.setOnClickListener {
+//            itemOnClick.onClick(product)
+//        }
 
-        // 🔹 Load 0th image
->>>>>>> Stashed changes
         if (!product.images.isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
                 .load(product.images!![0])

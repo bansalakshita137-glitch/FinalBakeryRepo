@@ -17,21 +17,8 @@ import com.o7solutions.student_project_bakingo.Product
 import com.o7solutions.student_project_bakingo.R
 import com.o7solutions.student_project_bakingo.databinding.FragmentProductsBinding
 
-<<<<<<< Updated upstream
-class productsFragment : Fragment() {
-=======
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [productsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */class productsFragment : Fragment(), ProductAdapter.OnItemClickListener {
->>>>>>> Stashed changes
-
+class productsFragment : Fragment(), ProductAdapter.OnItemClickListener {
     private lateinit var binding: FragmentProductsBinding
     private lateinit var productAdapter: ProductAdapter
     private val productList = ArrayList<Product>()
@@ -64,7 +51,6 @@ private const val ARG_PARAM2 = "param2"
     }
 
     private fun setupRecycler() {
-<<<<<<< Updated upstream
 
         productAdapter = ProductAdapter(productList) { product ->
 
@@ -83,9 +69,7 @@ private const val ARG_PARAM2 = "param2"
                 bundle
             )
         }
-=======
-        productAdapter = ProductAdapter(productList,this)
->>>>>>> Stashed changes
+//        productAdapter = ProductAdapter(productList,this)
 
         binding.productRecyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
