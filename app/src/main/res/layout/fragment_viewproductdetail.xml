@@ -68,6 +68,7 @@
                 android:hint="Enter cake message"
                 android:padding="10dp"/>
 
+<<<<<<< Updated upstream
             <!-- Weight Title -->
             <TextView
                 android:layout_width="wrap_content"
@@ -96,5 +97,73 @@
         </LinearLayout>
 
     </ScrollView>
+=======
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Rs.600"
+            android:textSize="23dp"
+            />
+\
+
+        <ImageView
+            android:layout_width="425dp"
+            android:layout_height="109dp"
+            android:src="@drawable/img" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 </LinearLayout>
