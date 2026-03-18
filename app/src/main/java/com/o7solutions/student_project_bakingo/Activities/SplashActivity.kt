@@ -27,14 +27,14 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-//            if(auth.currentUser == null) {
-//
-//                startActivity(Intent(this, LoginActivity::class.java))
-//                finish()
-//            } else {
+            if(auth.currentUser == null) {
+
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-//            }
+            }
 
 
 

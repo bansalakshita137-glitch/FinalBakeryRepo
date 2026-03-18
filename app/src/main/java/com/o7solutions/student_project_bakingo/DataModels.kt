@@ -42,4 +42,17 @@ data class CartData(
     var images: ArrayList<String>? = ArrayList(),
     var weight: String? = null,
     var message: String? = null
+){
+    // Firebase needs this empty constructor
+    constructor() : this(null, null, null, null, null, null, null)
+}
+
+data class CartItemWrapper(
+    val key: String,    // This holds the push() key from Firebase (e.g., "-N1234abcd...")
+    val data: CartData  // This holds the actual object (Name, Price, Weight, etc.)
+)
+
+data class ProductWrapper(
+    val key: String,
+    val data: Product // Replace with your Product model name
 )

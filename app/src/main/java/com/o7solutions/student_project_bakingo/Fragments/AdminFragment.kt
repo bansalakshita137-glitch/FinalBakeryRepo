@@ -1,75 +1,90 @@
 package com.o7solutions.student_project_bakingo.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.*
+import com.o7solutions.student_project_bakingo.Adapters.AdminProductAdapter
+import com.o7solutions.student_project_bakingo.Product
+import com.o7solutions.student_project_bakingo.ProductWrapper
 import com.o7solutions.student_project_bakingo.R
+import com.o7solutions.student_project_bakingo.databinding.FragmentAdminBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AdminFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AdminFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentAdminBinding
+    private lateinit var adapter: AdminProductAdapter
+    private var allProducts = mutableListOf<ProductWrapper>()
+    private val database = FirebaseDatabase.getInstance().getReference("Products")
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, s: Bundle?): View {
+        binding = FragmentAdminBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.btnAddCategory).setOnClickListener {
+        setupUI()
+        fetchProducts()
+        setupSearch()
+    }
+
+    private fun setupUI() {
+        binding.rvAdminProducts.layoutManager = LinearLayoutManager(requireContext())
+        adapter = AdminProductAdapter(allProducts) { key -> deleteProduct(key) }
+        binding.rvAdminProducts.adapter = adapter
+
+        binding.btnAddCategory.setOnClickListener {
             findNavController().navigate(R.id.addCategoryFragment)
         }
-
-
-        view.findViewById<Button>(R.id.btnAddProduct).setOnClickListener {
+        binding.btnAddProduct.setOnClickListener {
             findNavController().navigate(R.id.addProductFragment)
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AdminFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AdminFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setupSearch() {
+        binding.etSearchProduct.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val query = s.toString().lowercase().trim()
+                val filtered = allProducts.filter {
+                    it.data.name?.lowercase()?.contains(query) == true
                 }
+                adapter.updateList(filtered)
             }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun fetchProducts() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                allProducts.clear()
+                for (data in snapshot.children) {
+                    val product = data.getValue(Product::class.java)
+                    data.key?.let { key ->
+                        product?.let { allProducts.add(ProductWrapper(key, it)) }
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun deleteProduct(key: String) {
+        database.child(key).removeValue().addOnSuccessListener {
+            Toast.makeText(requireContext(), "Product Removed", Toast.LENGTH_SHORT).show()
+        }
     }
 }

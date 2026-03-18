@@ -1,10 +1,15 @@
 package com.o7solutions.student_project_bakingo.Fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.google.android.material.chip.Chip
+import com.google.firebase.auth.FirebaseAuth
 import com.o7solutions.student_project_bakingo.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,6 +43,35 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var auth = FirebaseAuth.getInstance()
+        // Data passed from your Auth system (Firebase or Local)
+        val userEmail = auth.currentUser?.email.toString()
+        val userId = auth.currentUser?.uid
+
+        // Bind Views
+        view.findViewById<TextView>(R.id.tvUserEmail).text = userEmail
+        view.findViewById<TextView>(R.id.tvCustomerId).text = "CUST-$userId"
+
+        // WhatsApp Chip Logic
+        view.findViewById<Chip>(R.id.chipWhatsApp).setOnClickListener {
+            val wpIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://api.whatsapp.com/send?phone=+123456789&text=Hello Support!")
+            }
+            startActivity(wpIntent)
+        }
+
+        // Call Support Chip Logic
+        view.findViewById<Chip>(R.id.chipCall).setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:+123456789")
+            }
+            startActivity(callIntent)
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

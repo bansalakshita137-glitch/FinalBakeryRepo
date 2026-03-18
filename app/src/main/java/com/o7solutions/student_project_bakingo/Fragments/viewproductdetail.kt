@@ -70,7 +70,16 @@ class viewproductdetail : Fragment() {
 
         // 🔹 Add to Cart
         binding.btnAddToCart.setOnClickListener {
+            val currentUser = FirebaseAuth.getInstance().currentUser
 
+            // 1. Check if user is logged in
+            if (currentUser == null) {
+                Toast.makeText(requireContext(), "Please login to add items to cart", Toast.LENGTH_SHORT).show()
+                // Optional: findNavController().navigate(R.id.loginFragment)
+                return@setOnClickListener
+            }
+
+            val userId = currentUser.uid // This is now guaranteed not to be null
             val message = binding.etMessage.text.toString()
 
             if (selectedWeight.isEmpty()) {
@@ -78,10 +87,9 @@ class viewproductdetail : Fragment() {
                 return@setOnClickListener
             }
 
-            // 🔹 Create CartData object instead of HashMap
             val cartItem = CartData(
                 name = name,
-                price = price?.toString(),   // your Product price is String
+                price = price,
                 description = description,
                 categoryId = arguments?.getString("categoryId"),
                 images = images,
@@ -89,13 +97,17 @@ class viewproductdetail : Fragment() {
                 message = message
             )
 
+            // 2. Use the verified userId
             FirebaseDatabase.getInstance()
                 .getReference("Cart")
-                .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
+                .child(userId)
                 .push()
                 .setValue(cartItem)
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }
