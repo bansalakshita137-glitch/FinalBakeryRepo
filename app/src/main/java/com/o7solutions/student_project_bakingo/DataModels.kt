@@ -56,3 +56,12 @@ data class ProductWrapper(
     val key: String,
     val data: Product // Replace with your Product model name
 )
+
+data class OrderData(
+    val orderId: String? = null,
+    val name: String? = null,
+    val price: String? = null,
+    val weight: String? = null,
+    val status: String? = "Pending", // "Pending" or "Completed"
+    val timestamp: Long = System.currentTimeMillis()
+)

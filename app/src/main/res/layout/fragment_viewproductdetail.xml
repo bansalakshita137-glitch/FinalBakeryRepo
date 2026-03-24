@@ -32,7 +32,7 @@
             <ImageView
                 android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="350dp"
                 android:scaleType="centerCrop"/>
 
             <!-- Product Name -->

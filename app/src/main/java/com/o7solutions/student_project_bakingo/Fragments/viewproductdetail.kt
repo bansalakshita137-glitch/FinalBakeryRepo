@@ -16,20 +16,12 @@ import com.o7solutions.student_project_bakingo.CartData
 import com.o7solutions.student_project_bakingo.R
 import com.o7solutions.student_project_bakingo.databinding.FragmentViewproductdetailBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [viewproductdetail.newInstance] factory method to
- * create an instance of this fragment.
- */
 class viewproductdetail : Fragment() {
 
     private lateinit var binding: FragmentViewproductdetailBinding
     private var selectedWeight: String = ""
+    private var basePrice: Double = 0.0
+    private var currentCalculatedPrice: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,75 +32,98 @@ class viewproductdetail : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
-        binding.toolbar.setNavigationOnClickListener{
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+
+        // 1. Get arguments
         val name = arguments?.getString("name")
-        val price = arguments?.getString("price")
+        val priceString = arguments?.getString("price") ?: "0"
         val description = arguments?.getString("description")
         val images = arguments?.getStringArrayList("images")
+        val categoryId = arguments?.getString("categoryId")
 
+        // 2. Initialize Prices
+        basePrice = priceString.toDoubleOrNull() ?: 0.0
+        currentCalculatedPrice = basePrice // Default to base price
+
+        // 3. Set initial UI
         binding.tvName.text = name
-        binding.tvPrice.text = "₹$price"
+        binding.tvPrice.text = "₹$basePrice"
         binding.tvDescription.text = description
 
         Glide.with(requireContext())
             .load(images?.getOrNull(0))
             .into(binding.imgProduct)
 
-        // 🔹 Setup Weight Recycler
+        // 4. Setup Weight Recycler
         val weights = listOf("0.5 Kg", "1 Kg", "2 Kg")
 
         binding.weightRecycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        binding.weightRecycler.adapter = WeightAdapter(weights) {
-            selectedWeight = it
+        binding.weightRecycler.adapter = WeightAdapter(weights) { weight ->
+            selectedWeight = weight
+            updatePriceUI(weight)
         }
 
-        // 🔹 Add to Cart
+        // 5. Add to Cart Logic
         binding.btnAddToCart.setOnClickListener {
             val currentUser = FirebaseAuth.getInstance().currentUser
 
-            // 1. Check if user is logged in
             if (currentUser == null) {
                 Toast.makeText(requireContext(), "Please login to add items to cart", Toast.LENGTH_SHORT).show()
-                // Optional: findNavController().navigate(R.id.loginFragment)
                 return@setOnClickListener
             }
-
-            val userId = currentUser.uid // This is now guaranteed not to be null
-            val message = binding.etMessage.text.toString()
 
             if (selectedWeight.isEmpty()) {
-                Toast.makeText(requireContext(), "Select weight", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please select a weight first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            val userId = currentUser.uid
+            val message = binding.etMessage.text.toString()
+
+            // Use the calculated price for the cart
             val cartItem = CartData(
                 name = name,
-                price = price,
+                price = currentCalculatedPrice.toString(),
                 description = description,
-                categoryId = arguments?.getString("categoryId"),
+                categoryId = categoryId,
                 images = images,
                 weight = selectedWeight,
                 message = message
             )
 
-            // 2. Use the verified userId
             FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child(userId)
                 .push()
                 .setValue(cartItem)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Added to cart successfully", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    /**
+     * Updates the price based on weight logic.
+     * You can adjust the multipliers (1.8, 3.5) based on your pricing strategy.
+     */
+    private fun updatePriceUI(weight: String) {
+        currentCalculatedPrice = when (weight) {
+            "0.5 Kg" -> basePrice
+            "1 Kg" -> basePrice * 1.8
+            "2 Kg" -> basePrice * 3.4
+            else -> basePrice
+        }
+
+        // Update the TextView (formatting to remove unnecessary decimals)
+        binding.tvPrice.text = "₹${String.format("%.0f", currentCalculatedPrice)}"
     }
 }

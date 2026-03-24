@@ -21,6 +21,7 @@ import com.o7solutions.student_project_bakingo.CarouselItem
 import com.o7solutions.student_project_bakingo.Category
 import com.o7solutions.student_project_bakingo.R
 import com.o7solutions.student_project_bakingo.databinding.FragmentHomeBinding
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -30,20 +31,23 @@ class HomeFragment : Fragment() {
     private var currentPosition = 0
 
     private val imageList = listOf(
-        CarouselItem(R.drawable.cake1), // Note: Verify if these are drawable IDs or Image IDs
+        CarouselItem(R.drawable.cake1),
         CarouselItem(R.drawable.cake2),
         CarouselItem(R.drawable.cake3),
         CarouselItem(R.drawable.cake4),
         CarouselItem(R.drawable.cake5)
     )
 
-    // Define the auto-scroll task
+    // 1. Fixed Runnable with Null Safety
     private val scrollRunnable = object : Runnable {
         override fun run() {
-            if (imageList.isNotEmpty()) {
-                currentPosition = (currentPosition + 1) % imageList.size
-                binding.carouselRecyclerView.smoothScrollToPosition(currentPosition)
-                handler.postDelayed(this, 3000) // 3 seconds interval
+            // Check if binding still exists before scrolling
+            _binding?.let {
+                if (imageList.isNotEmpty()) {
+                    currentPosition = (currentPosition + 1) % imageList.size
+                    it.carouselRecyclerView.smoothScrollToPosition(currentPosition)
+                    handler.postDelayed(this, 3000)
+                }
             }
         }
     }
@@ -76,19 +80,26 @@ class HomeFragment : Fragment() {
         FirebaseDatabase.getInstance().getReference("Categories")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+
+                    // 2. CRITICAL FIX: Check if binding is null before updating UI
+                    if (_binding == null || !isAdded) return
+
                     val list = mutableListOf<Category>()
                     for (data in snapshot.children) {
                         val category = data.getValue(Category::class.java)
                         category?.let { list.add(it) }
                     }
-                    binding.rvCategories.adapter = HomeCategoryAdapter(list, { category->
+
+                    binding.rvCategories.adapter = HomeCategoryAdapter(list) { category ->
+
+                        // Safety check inside click listener
+                        if (!isAdded) return@HomeCategoryAdapter
 
                         if (category.categoryId.isNullOrEmpty()) {
                             Toast.makeText(requireContext(), "Invalid category", Toast.LENGTH_SHORT).show()
                             return@HomeCategoryAdapter
                         }
 
-                        // 🔹 Pass categoryId to ProductsFragment
                         val bundle = Bundle().apply {
                             putString("categoryId", category.categoryId)
                         }
@@ -97,18 +108,32 @@ class HomeFragment : Fragment() {
                             R.id.productsFragment,
                             bundle
                         )
-
-                    })
+                    }
                 }
-                override fun onCancelled(error: DatabaseError) {}
+
+                override fun onCancelled(error: DatabaseError) {
+                    if (isAdded) {
+                        Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
             })
     }
 
-    // Stop the timer when the fragment is gone
+    // 3. Stop the timer immediately when the view is destroyed
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(scrollRunnable)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Restart scrolling when user comes back to Home
+        handler.postDelayed(scrollRunnable, 3000)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         handler.removeCallbacks(scrollRunnable)
         _binding = null
     }
 }
-
