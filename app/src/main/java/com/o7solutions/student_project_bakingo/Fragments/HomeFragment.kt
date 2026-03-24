@@ -68,6 +68,7 @@ class HomeFragment : Fragment() {
 
         // Setup Categories
         val layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
+
         binding.rvCategories.layoutManager = layoutManager
 
         fetchCategories()
