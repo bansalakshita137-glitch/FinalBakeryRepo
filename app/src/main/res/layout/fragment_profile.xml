@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="johndoe@email.com"
+                    android:text="GloriousCake01@gmail.com"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
 
