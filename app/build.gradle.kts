@@ -62,7 +62,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    implementation("com.razorpay:checkout:1.6.33")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 //    Appwrite
     implementation("io.appwrite:sdk-for-android:12.0.0") // Check for the latest version

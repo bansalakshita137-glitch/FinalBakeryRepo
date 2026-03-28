@@ -66,6 +66,14 @@
         android:name="com.o7solutions.student_project_bakingo.Fragments.viewproductdetail"
         android:label="fragment_viewproductdetail"
         tools:layout="@layout/fragment_viewproductdetail" />
+    <fragment
+        android:id="@+id/insightsFragment"
+        android:name="com.o7solutions.student_project_bakingo.Fragments.InsightsFragment"
+        android:label="InsightsFragment" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.o7solutions.student_project_bakingo.Fragments.OrdersFragment"
+        android:label="OrdersFragment" />
 
 
 </navigation>

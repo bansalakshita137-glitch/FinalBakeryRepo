@@ -14,7 +14,7 @@
 
 
     <item
-        android:id="@+id/cartFragment"
+        android:id="@+id/ordersFragment"
         android:icon="@drawable/shopping_png"
         android:title="Cart" />
 
